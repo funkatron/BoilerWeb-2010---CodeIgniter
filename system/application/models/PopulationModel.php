@@ -14,11 +14,12 @@ class PopulationModel extends Model {
 	
 	/**
 	 * format determines the format returned by the model
-	 * can be 'php' (default), 'json', or 'xml'
+	 * see FORMAT_xxx class constants for options
 	 *
 	 * @var string
 	 **/
-	public format = self::FORMAT_PHP;
+	public $format = self::FORMAT_PHP;
+	
 	
 	/**
 	 * Constructor
@@ -44,8 +45,17 @@ class PopulationModel extends Model {
 	 */
 	public function getCountries() {
 		
+		$data = array();
+		
+		$q = $this->db->query('SELECT DISTINCT country FROM country_population');
+		
+		foreach ($q->result() as $row) {
+			$data[] = $row->country;
+		}
+		
 		return $this->format($data);
 	}
+	
 	
 	/**
 	 * returns a set of valid years in database
@@ -55,24 +65,58 @@ class PopulationModel extends Model {
 	 */
 	public function getYears()
 	{
-		return $this->format($data)
+		$data = array();
+		
+		$q = $this->db->query('SELECT DISTINCT year FROM country_population');
+		
+		foreach ($q->result() as $row) {
+			$data[] = $row->year;
+		}
+		
+		return $this->format($data);
 	}
 	
 	
 	/**
 	 * get some data. all parameters are optional
 	 *
-	 * @param string $country 
-	 * @param integer $year
-	 * @param integer $start default 0
-	 * @param string $count  default -1, which means "everything"
+	 * @param string $country   a valid country name
+	 * @param integer $year     a valid year
+	 * @param integer $start    default 0
+	 * @param string $count     default 0, which means "everything"
 	 * @return string|array
 	 * @author Ed Finkler
 	 */
-	public function get($country=null, $year=null, $start=0, $count=-1) {
+	public function get($country=null, $year=null, $count=0, $start=0) {
+		
+		$data = array();
+		
+		/**
+		 * for performance, specify columns instead of using '*'
+		 */
+		$this->db->select('country, year, population');
+		if ( isset($country) ) {
+			$this->db->where("country", $country);
+		}
+		if ( isset($year) ) {
+			$this->db->where("year", $year);
+		}
+		
+		if ($start > 0 && $count > 0) {
+			$this->db->limit($count, $start);
+		} elseif ($count > 0) {
+			$this->db->limit($count);
+		}
+		
+		$q = $this->db->get('country_population');
+		
+		foreach ($q->result() as $row) {
+			$data[] = $row;
+		}
 		
 		return $this->format($data);
 	}
+	
 
 	/**
 	 * get ALL data
@@ -86,25 +130,25 @@ class PopulationModel extends Model {
 	}
 	
 	
-	public function getOne($country, $year, $start=0, $count=-1) {
+	public function getOne($country, $year, $count=0, $start=0) {
 		
-		$data = $this->getOne($country, $year, $start, $count);
-		
-		return $this->format($data);
-	}
-	
-	
-	public function getByYear($year, $start=0, $count=-1) {
-		
-		$data = $this->getOne($year, $start, $count);
+		$data = $this->get($country, $year, $start, $count);
 		
 		return $this->format($data);
 	}
 	
 	
-	public function getByCountry($country, $start=0, $count=-1) {
+	public function getByYear($year, $count=0, $start=0) {
 		
-		$data = $this->getOne($country, $start, $count);
+		$data = $this->get($year, $start, $count);
+		
+		return $this->format($data);
+	}
+	
+	
+	public function getByCountry($country, $count=0, $start=0) {
+		
+		$data = $this->get($country, $start, $count);
 		
 		return $this->format($data);
 	}
@@ -127,6 +171,17 @@ class PopulationModel extends Model {
 				$return_data = $data;				
 		}
 		return $return_data;
+	}
+	
+	
+	public function setFormat($format)
+	{
+		$this->format = $format;
+	}
+
+	public function getFormat()
+	{
+		return $this->format;
 	}
 	
 }

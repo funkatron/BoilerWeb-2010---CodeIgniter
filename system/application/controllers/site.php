@@ -16,6 +16,11 @@ class Site extends Controller {
 	 */
 	public function __construct() {
 		parent::__construct();
+
+		$this->output->enable_profiler(TRUE);
+		
+		$this->load->model('PopulationModel');
+
 	}
 	
 	/**
@@ -27,27 +32,36 @@ class Site extends Controller {
 	
 	
 	
-	public function search($country=null, $year=null, $start=0, $length=25) {
+	public function one($country, $year) {
+		$vdata = $this->search($country, null, $count, $start);
+		$this->load->view('dumpdata', $vdata);
+	}
+	
+	
+	
+	public function country($country, $count=0, $start=0) {
+		$vdata = $this->search($country, null, $count, $start);
+		$this->load->view('dumpdata', $vdata);
+	}
+	
+	
+	
+	public function year($year, $count=0, $start=0) {
+		$vdata = $this->search(null, $year, $count, $start);
+		$this->load->view('dumpdata', $vdata);	
+	}
+	
+	
+	
+	private function search($country=null, $year=null, $count=0, $start=0) {
 		
-	}
-	
-	
-	
-	public function getOne($country, $year) {
-			
-	}
-	
-	
-	
-	public function country($country) {
+		$vdata = array();
 		
-	}
-	
-	
-	
-	public function year($year) {
+		$vdata['data'] = $this->PopulationModel->get($country, $year, $count, $start);
 		
+		return $vdata;
 	}
+	
 	
 }
 
