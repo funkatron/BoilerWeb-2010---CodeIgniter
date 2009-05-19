@@ -1,1 +1,3 @@
 *.kpf
+system/logs*
+system/cache*

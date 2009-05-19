@@ -1,0 +1,34 @@
+Body{
+	font-family:Helvetica, Arial, sans-serif;
+}
+
+#container {
+	width:600px;
+}
+
+#countries-list {
+	width:250px;
+	margin-right:50px;
+	float:left;
+}
+
+#years-list {
+	width:250px;
+	margin-right:50px;
+	float:left;
+}
+
+
+table.datatable {
+	border:3px solid #333;
+}
+
+	table.datatable th {
+		border: 1px solid #666;
+		font-size:12pt !important;
+	}
+
+	table.datatable td {
+		border: 1px solid #999;
+		font-size:12pt;
+	}

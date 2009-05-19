@@ -8,9 +8,9 @@
  **/
 class PopulationModel extends Model {
 	
-	const FORMAT_PHP		= 'PHP';
-	const FORMAT_JSON		= 'JSON';
-	const FORMAT_SERIALPHP	= 'PHP_SERIAL';
+	const FORMAT_PHP		= 'php';
+	const FORMAT_JSON		= 'json';
+	const FORMAT_SERIALPHP	= 'sphp';
 	
 	/**
 	 * format determines the format returned by the model
@@ -95,10 +95,10 @@ class PopulationModel extends Model {
 		 * for performance, specify columns instead of using '*'
 		 */
 		$this->db->select('country, year, population');
-		if ( isset($country) ) {
+		if ( isset($country) && $country) {
 			$this->db->where("country", $country);
 		}
-		if ( isset($year) ) {
+		if ( isset($year) && $year ) {
 			$this->db->where("year", $year);
 		}
 		

@@ -20,46 +20,73 @@ class Site extends Controller {
 		$this->output->enable_profiler(TRUE);
 		
 		$this->load->model('PopulationModel');
-
+		$this->load->helper('url');
+		$this->load->helper('html');	
 	}
 	
 	/**
 	 * this is our default if no method is specified on the URL
 	 */
 	public function index() {
-		$this->load->view('welcome_message');
+		
+		$this->output->cache(5);
+		
+		$vdata = array();
+		$vdata['page_title'] = 'Population Estimates';
+		$vdata['countries'] = $this->PopulationModel->getCountries();
+		$vdata['years']	    = $this->PopulationModel->getYears();
+		
+		$this->load->view('splash', $vdata);
 	}
 	
 	
 	
 	public function one($country, $year) {
-		$vdata = $this->search($country, null, $count, $start);
+		$vdata = array();
+		$vdata['page_title'] = 'One Result';
+		$vdata['data'] = $this->_search($country, $year, $count, $start);
+				
 		$this->load->view('dumpdata', $vdata);
 	}
 	
 	
 	
 	public function country($country, $count=0, $start=0) {
-		$vdata = $this->search($country, null, $count, $start);
-		$this->load->view('dumpdata', $vdata);
+		$vdata = array();
+		$vdata['page_title'] = 'Country';
+		$vdata['data'] = $this->_search($country, null, $count, $start);
+		$this->load->view('country', $vdata);
 	}
 	
 	
 	
 	public function year($year, $count=0, $start=0) {
-		$vdata = $this->search(null, $year, $count, $start);
-		$this->load->view('dumpdata', $vdata);	
+		$vdata = array();
+		$vdata['page_title'] = 'Year';
+		$vdata['data'] = $this->_search(null, $year, $count, $start);
+		$this->load->view('year', $vdata);	
+	}
+	
+	
+	public function search() {
+		$input = $this->uri->uri_to_assoc(3, array('country', 'year', 'count', 'start') );
+		
+		$vdata = array();
+		$vdata['page_title'] = 'Search';
+		$vdata['data'] = $this->_search($input['country'], (int)$input['year'], (int)$input['count'], (int)$input['start']);
+		
+		$this->load->view('year', $vdata);
 	}
 	
 	
 	
-	private function search($country=null, $year=null, $count=0, $start=0) {
+	private function _search($country=null, $year=null, $count=0, $start=0) {
 		
-		$vdata = array();
+		$data = array();
 		
-		$vdata['data'] = $this->PopulationModel->get($country, $year, $count, $start);
+		$data = $this->PopulationModel->get($country, $year, $count, $start);
 		
-		return $vdata;
+		return $data;
 	}
 	
 	
