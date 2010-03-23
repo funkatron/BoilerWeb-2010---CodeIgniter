@@ -29,21 +29,24 @@ class api extends Controller {
 	}
 	
 	public function getCountries() {
+		$this->PopulationModel->setFormat(PopulationModel::FORMAT_JSON);
 		$countries = $this->PopulationModel->getCountries();
 		$this->_sendRaw($countries);
 		return;
 	}
 
 	public function getYears() {
+		$this->PopulationModel->setFormat(PopulationModel::FORMAT_JSON);
 		$years = $this->PopulationModel->getYears();
-		$this->_sendRaw($countries);
+		$this->_sendRaw($years);
 		return;
 	}
 	
 	
 	
 	public function one($country, $year) {
-		$data = $this->_search($country, $year, $count, $start);
+		$this->PopulationModel->setFormat(PopulationModel::FORMAT_JSON);
+		$data = $this->_search($country, $year);
 		$this->_sendRaw($data);
 		return;
 	}
@@ -51,6 +54,7 @@ class api extends Controller {
 	
 	
 	public function country($country, $count=0, $start=0) {
+		$this->PopulationModel->setFormat(PopulationModel::FORMAT_JSON);
 		$data = $this->_search($country, null, $count, $start);
 		$this->_sendRaw($data);
 		return;
@@ -59,6 +63,7 @@ class api extends Controller {
 	
 	
 	public function year($year, $count=0, $start=0) {
+		$this->PopulationModel->setFormat(PopulationModel::FORMAT_JSON);
 		$data = $this->_search(null, $year, $count, $start);
 		$this->_sendRaw($data);
 		return;
@@ -67,6 +72,7 @@ class api extends Controller {
 	
 	public function search() {
 		$input = $this->uri->uri_to_assoc(3, array('country', 'year', 'count', 'start', 'format') );
+
 		
 		$data = $this->_search($input['country'],
 								(int)$input['year'],

@@ -31,6 +31,7 @@ function create_menu(basepath)
 		'<ul>' +
 			'<li><a href="'+base+'overview/getting_started.html">Getting Started</a></li>' +
 			'<li><a href="'+base+'overview/at_a_glance.html">CodeIgniter at a Glance</a></li>' +
+			'<li><a href="'+base+'overview/cheatsheets.html">CodeIgniter Cheatsheets</a></li>' +
 			'<li><a href="'+base+'overview/features.html">Supported Features</a></li>' +
 			'<li><a href="'+base+'overview/appflow.html">Application Flow Chart</a></li>' +
 			'<li><a href="'+base+'overview/mvc.html">Model-View-Controller</a></li>' +
@@ -73,7 +74,8 @@ function create_menu(basepath)
 		'<h3>Class Reference</h3>' +
 		'<ul>' +
 		'<li><a href="'+base+'libraries/benchmark.html">Benchmarking Class</a></li>' +
-		'<li><a href="'+base+'libraries/calendar.html">Calendaring Class</a></li>' +
+		'<li><a href="'+base+'libraries/calendar.html">Calendar Class</a></li>' +
+		'<li><a href="'+base+'libraries/cart.html">Cart Class</a></li>' +
 		'<li><a href="'+base+'libraries/config.html">Config Class</a></li>' +
 		'<li><a href="'+base+'database/index.html">Database Class</a></li>' +
 		'<li><a href="'+base+'libraries/email.html">Email Class</a></li>' +

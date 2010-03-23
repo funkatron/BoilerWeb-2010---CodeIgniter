@@ -7,17 +7,17 @@
 
 	<title><?=$page_title?></title>
 	
-	<!-- <link rel="stylesheet" href="<?=base_url()?>assets/css/tek09-mvc.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+	<link rel="stylesheet" href="<?=base_url()?>assets/css/tek09-mvc.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	
-	<!-- <script src="<?=base_url()?>assets/js/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script> -->
-	<!-- <script src="<?=base_url()?>assets/js/jquery.tablesorter.js" type="text/javascript" charset="utf-8"></script> -->
-	<!-- <link rel="stylesheet" href="<?=base_url()?>assets/css/blue/style.css" type="text/css" media="screen" title="no title" charset="utf-8"> -->
+	<script src="<?=base_url()?>assets/js/jquery-1.3.2.js" type="text/javascript" charset="utf-8"></script>
+	<script src="<?=base_url()?>assets/js/jquery.tablesorter.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" href="<?=base_url()?>assets/css/blue/style.css" type="text/css" media="screen" title="no title" charset="utf-8">
 	
-	<!-- <script type="text/javascript" charset="utf-8">
+	<script type="text/javascript" charset="utf-8">
 		$().ready( function() {
 			$('.tablesorter').tablesorter();
 		})
-	</script> -->
+	</script>
 	
 </head>
 

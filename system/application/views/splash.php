@@ -1,23 +1,26 @@
 <?php $this->load->view('page/header'); ?>
 
-<div id="countries-list">
-	<h2>Countries</h2>
-	<ul>
+<table class="datatable tablesorter">
+	<thead>
+		<tr>
+			<th>Country</th>
+			<th>Year</th>
+		</tr>
+	</thead>
+	
+	<tbody>
 	<?php foreach ($countries as $country): ?>
-		<li><?=anchor('site/country/'.$country, $country)?></li>
+		<tr>
+			<td><?=anchor('site/country/'.$country, $country)?></td>
+			<td>
+				<?php foreach ($years as $year): ?>
+					<?=anchor('site/year/'.$year, $year)?>
+				<?php endforeach ?>
+			</td>
+		</tr>
 	<?php endforeach ?>
-	</ul>
-
-</div>
-
-<div id="years-list">
-	<h2>Years</h2>
-	<ul>
-	<?php foreach ($years as $year): ?>
-		<li><?=anchor('site/year/'.$year, $year)?></li>
-	<?php endforeach ?>
-	</ul>
-</div>
+	</tbody>
+</table>
 
 
 <?php $this->load->view('page/footer'); ?>

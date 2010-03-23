@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 1.7.1</h1></td>
+<td><h1>CodeIgniter User Guide Version 1.7.2</h1></td>
 <td id="breadcrumb_right"><a href="./toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -57,15 +57,75 @@ Change Log
 
 <h1>Change Log</h1>
 
-<h2>Version 1.7.2</h2>
+<h2>Version 1.7.3</h2>
 <p>Release Date: not yet released<br />
 SVN Revision: </p>
 
+<h2>Version 1.7.2</h2>
+<p>Release Date: September 11, 2009<br />
+SVN Revision: 1737</p>
+
 <ul>
+	<li>Libraries
+		<ul>
+			<li>Added a new <a href="libraries/cart.html">Cart Class</a>.</li>
+			<li>Added the ability to pass $config['file_name'] for the <a href="libraries/file_uploading.html">File Uploading Class</a> and rename the uploaded file.</li>
+			<li>Changed order of listed user-agents so Safari would more accurately report itself. (#6844)</li>
+		</ul>
+	</li>
+	<li>Database
+		<ul>
+			<li>Switched from using gettype() in escape() to is_* methods, since future PHP versions might change its output.</li>
+			<li>Updated all database drivers to handle arrays in escape_str()</li>
+			<li>Added escape_like_str() method for escaping strings to be used in LIKE conditions</li>
+			<li>Updated Active Record to utilize the new LIKE escaping mechanism.</li>
+			<li>Added reconnect() method to DB drivers to try to keep alive / reestablish a connection after a long idle.</li>
+			<li>Modified MSSQL driver to use mssql_get_last_message() for error messages.</li>
+		</ul>
+	</li>
+	<li>Helpers
+		<ul>
+			<li>Added <kbd>form_multiselect()</kbd> to the <a href="helpers/form_helper.html">Form helper</a>.</li>
+			<li>Modified <kbd>form_hidden()</kbd> in the <a href="helpers/form_helper.html">Form helper</a> to accept multi-dimensional arrays.</li>
+			<li>Modified <kbd>form_prep()</kbd> in the <a href="helpers/form_helper.html">Form helper</a> to keep track of prepped fields to avoid multiple prep/mutation from subsequent calls which can occur when using Form Validation
+				and form helper functions to output form fields.</li>
+			<li>Modified <kbd>directory_map()</kbd> in the <a href="helpers/directory_helper.html">Directory helper</a> to allow the inclusion of hidden files, and to return FALSE on failure to read directory.</li>
+			<li>Modified the <a href="helpers/smiley_helper.html">Smiley helper</a> to work with multiple fields and insert the smiley at the last known cursor position.</li>
+		</ul>
+	</li>
+	<li>General
+		<ul>
+			<li>Compatible with PHP 5.3.0</li>
+			<li>Modified <a href="general/errors.html">show_error()</a> to allow sending of HTTP server response codes.</li>
+			<li>Modified <a href="general/errors.html">show_404()</a> to send 404 status code, removing non-CGI compatible header() statement from error_404.php template.</li>
+			<li>Added set_status_header() to the <a href="general/common_functions.html">Common functions<a> to allow use when the Output class is unavailable.</li>
+			<li>Added is_php() to <a href="general/common_functions.html">Common functions</a> to facilitate PHP version comparisons.</p> 
+			<li>Added 2 CodeIgniter "cheatsheets" (thanks to DesignFellow.com for this contribution).</li>
+		</ul>
+	</li>
 </ul>
 
 <h3>Bug fixes for 1.7.2</h3>
 <ul>
+	<li>Fixed assorted user guide typos or examples (#6743, #7214, #7516, #7287, #7852, #8224, #8324, #8349).</li>
+	<li>Fixed a bug in the Form Validation library where multiple callbacks weren't working (#6110)</li>
+	<li>doctype helper default value was missing a "1".</li>
+	<li>Fixed a bug in the language class when outputting an error for an unfound file.</li>
+	<li>Fixed a bug in the Calendar library where the shortname was output for "May".</li>
+	<li>Fixed a bug with ORIG_PATH_INFO that was allowing URIs of just a slash through.</li>
+	<li>Fixed a fatal error in the Oracle and ODBC drivers (#6752)</li>
+	<li>Fixed a bug where xml_from_result() was checking for a nonexistent method.</li>
+	<li>Fixed a bug where Database Forge's add_column and modify_column were not looping through when sent multiple fields.</li>
+	<li>Fixed a bug where the File Helper was using '/' instead of the DIRECTORY_SEPARATOR constant.</li>
+	<li>Fixed a bug to prevent PHP errors when attempting to use sendmail on servers that have manually disabled the PHP popen() function.</li>
+	<li>Fixed a bug that would cause PHP errors in XML-RPC data if the PHP data type did not match the specified XML-RPC type.</li>
+	<li>Fixed a bug in the XML-RPC class with parsing dateTime.iso8601 data types.</li>
+	<li>Fixed a case sensitive string replacement in xss_clean()</li>
+	<li>Fixed a bug in form_textarea() where form data was not prepped correctly.</li>
+	<li>Fixed a bug in form_prep() causing it to not preserve entities in the user's original input when called back into a form element</li>
+	<li>Fixed a bug in _protect_identifiers() where the swap prefix ($swap_pre) was not being observed.</li>
+	<li>Fixed a bug where the 400 status header sent with the 'disallowed URI characters' was not compatible with CGI environments.</li> 
+	<li>Fixed a bug in the typography class where heading tags could have paragraph tags inserted when using auto_typography().</li>
 </ul>
 
 <h2>Version 1.7.1</h2>
@@ -1013,7 +1073,7 @@ Previous Topic:&nbsp;&nbsp;<a href="license.html">License Agreement</a>
 <a href="index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 Next Topic:&nbsp;&nbsp;<a href="./general/credits.html">Credits</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2009 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
 </div>
 
 </body>

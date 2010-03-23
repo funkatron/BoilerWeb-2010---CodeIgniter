@@ -29,7 +29,7 @@ class Site extends Controller {
 	 */
 	public function index() {
 		
-		$this->output->cache(5);
+		$this->output->cache(0);
 		
 		$vdata = array();
 		$vdata['page_title'] = 'Population Estimates';
@@ -45,7 +45,6 @@ class Site extends Controller {
 		$vdata = array();
 		$vdata['page_title'] = 'One Result';
 		$vdata['data'] = $this->_search($country, $year, $count, $start);
-				
 		$this->load->view('dumpdata', $vdata);
 	}
 	
@@ -75,7 +74,7 @@ class Site extends Controller {
 		$vdata['page_title'] = 'Search';
 		$vdata['data'] = $this->_search($input['country'], (int)$input['year'], (int)$input['count'], (int)$input['start']);
 		
-		$this->load->view('year', $vdata);
+		$this->load->view('dumpdata', $vdata);
 	}
 	
 	

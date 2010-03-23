@@ -28,7 +28,7 @@
 <div id="masthead">
 <table cellpadding="0" cellspacing="0" border="0" style="width:100%">
 <tr>
-<td><h1>CodeIgniter User Guide Version 1.7.1</h1></td>
+<td><h1>CodeIgniter User Guide Version 1.7.2</h1></td>
 <td id="breadcrumb_right"><a href="../toc.html">Table of Contents Page</a></td>
 </tr>
 </table>
@@ -198,7 +198,7 @@ example, you will instead specify "rows" and "cols".</p>
 
 <p>Lets you create a standard drop-down field.  The first parameter will contain the name of the field,
 the second parameter will contain an associative array of options, and the third parameter will contain the
-value you wish to be selected.  You can also pass an array through the third parameter, and CodeIgniter will create a multiple select for you. Example:</p>
+value you wish to be selected.  You can also pass an array of multiple items through the third parameter, and CodeIgniter will create a multiple select for you. Example:</p>
 
 <code>$options = array(<br />
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'small'&nbsp;&nbsp;=> 'Small Shirt',<br />
@@ -240,6 +240,14 @@ fourth parameter:</p>
 echo form_dropdown('shirts', $options, 'large', $js);</code>
 
 <p>If the array passed as $options is a multidimensional array, form_dropdown() will produce an &lt;optgroup&gt; with the array key as the label.</p>
+
+<h2>form_multiselect()</h2>
+
+<p>Lets you create a standard multiselect field.  The first parameter will contain the name of the field,
+the second parameter will contain an associative array of options, and the third parameter will contain the
+value or values you wish to be selected.  The parameter usage is identical to using <kbd>form_dropdown()</kbd> above,
+except of course that the name of the field will need to use POST array syntax, e.g. <samp>foo[]</samp>.</p>
+
 
 <h2>form_fieldset()</h2>
 
@@ -469,7 +477,7 @@ Previous Topic:&nbsp;&nbsp;<a href="file_helper.html">File Helper</a>
 <a href="../index.html">User Guide Home</a>&nbsp;&nbsp;&nbsp;&middot;&nbsp;&nbsp;
 Next Topic:&nbsp;&nbsp;<a href="html_helper.html">HTML Helper</a>
 </p>
-<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2008 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
+<p><a href="http://codeigniter.com">CodeIgniter</a> &nbsp;&middot;&nbsp; Copyright &#169; 2006-2009 &nbsp;&middot;&nbsp; <a href="http://ellislab.com/">Ellislab, Inc.</a></p>
 </div>
 
 </body>

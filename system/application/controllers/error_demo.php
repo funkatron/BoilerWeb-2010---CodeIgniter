@@ -9,7 +9,7 @@ class Error_Demo extends Controller {
 	
 	function index()
 	{	
-		// restore_error_handler();
+		restore_error_handler();
 
 		echo 'log_errors:'.ini_get('log_errors')."<br/>";
 		echo 'display_errors:'.ini_get('display_errors')."<br/>";
